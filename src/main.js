@@ -2,9 +2,11 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
 var spawn = require('child_process').spawn;
-const result = spawn('py', ['./python_src/webmToMp4/WebmToMp4.py'
-                    , './python_src/video/test4.webm'
-                    , './python_src/video/test4.mp4']);
+// exe 윈도우 파일 실행하기
+const result = spawn('./python_src/webmToMp4/rtc2', [
+  './python_src/video/test4.webm'
+ , './python_src/video/test4.mp4']);
+
 
 function createWindow () { 
   const win = new BrowserWindow({ 
@@ -19,6 +21,8 @@ function createWindow () {
 } 
 app.whenReady().then(() => { 
   createWindow();
+
+  // 실행 결과 출력
   result.stdout.on("data", function(data) {
     console.log(data.toString());
   });
