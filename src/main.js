@@ -1,12 +1,11 @@
 const { ipcMain, app, BrowserWindow } = require('electron');
-const path = require('path');
 const emotion = require("./emotion.json")
 
 
 // python ===============================================
 
 var spawn = require('child_process').spawn;
-  
+
 
 function createWindow () { 
   const win = new BrowserWindow({ 
@@ -32,13 +31,13 @@ app.whenReady().then(() => {
       path.webm,
       path.mp4
     ]);
-
     // 실행 결과 출력
     result.on('close', (code) => {
       event.reply("convert success",emotion);
     });
     
   });
+  ipcMain.on("detecting emotion script")
 
 });
 app.on('window-all-closed', function () { 
